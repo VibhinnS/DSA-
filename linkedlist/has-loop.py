@@ -29,3 +29,4 @@ class Node:
             return False
         except ContainsLoopError:
             return True
+
