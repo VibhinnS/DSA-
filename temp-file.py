@@ -1,3 +1,10 @@
-M = [[0,1,0],[1,1,0],[0,0,0]]
-M[:] = list(zip(*M))[::-1]
-print(M)
+s = "a good  example"
+os = ""
+words = s.split(" ")
+for word in words:
+    word = word.strip()
+if "" in words:
+    words.remove("")
+for word in words[::-1]:
+    os += word + " "
+print(os.strip())

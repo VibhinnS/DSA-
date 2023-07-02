@@ -15,7 +15,8 @@ def permutations(arr):
         arr.append(n)
     return sorted(result)
 
-print(permutations([2,3,1]))
+# print(permutations([2,3,1]))
+
 
 
 def find_permutations(string):
@@ -35,4 +36,5 @@ def find_permutations(string):
     
     return permutations
 
-# print(find_permutations("abc"))
+print(find_permutations("abc"))
+

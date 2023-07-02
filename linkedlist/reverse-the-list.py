@@ -11,18 +11,30 @@ def reverse_list(self, head):
 
 
 # recursive solution
-def reverse(head,curr,prev):
+def reverse(self, head, curr, prev):
     if curr is None:
         head = prev
         return
 
     forward = curr.next
-    reverse(head,forward, curr)
     curr.next = prev
+    self.reverse(head, forward, curr)
+    return head
 
 
-def reverse_recursion(head):
+def reverseList(self, head):
+    if head is None:
+        return None
+
+    new_head = None
     curr = head
     prev = None
-    reverse(head,curr,prev)
+
+    while curr is not None:
+        forward = curr.next
+        curr.next = prev
+        prev = curr
+        curr = forward
+
+    head = prev
     return head

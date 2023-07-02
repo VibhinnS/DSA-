@@ -56,12 +56,12 @@ class LinkedList:
     def insert_after(self, after, value):
         new_node = Node(value)
         current = self.head
-        while current != None:
+        while current is not None:
             if current.data == after:
                 break
             current = current.next
 
-        if current != None:
+        if current is not None:
             new_node.next = current.next
             current.next = new_node
             self.n = self.n + 1
@@ -80,15 +80,15 @@ class LinkedList:
         self.n -= 1
 
     def pop(self):
-        if self.head == None:
+        if self.head is None:
             return 'Empty LL'
 
         current = self.head
 
-        if current.next == None:
+        if current.next is None:
             return self.delete_head()
 
-        while current.next.next != None:
+        while current.next.next is not None:
             current = current.next
 
         current.next = None
@@ -103,17 +103,22 @@ class LinkedList:
         return head
 
 
-
+    def deleteDuplicates(head):
+        curr = head
+        while curr.next is not None:
+            if curr == curr.next:
+                curr.next = curr.next.next
+                curr = curr.next
+            else:
+                curr = curr.next
+        return head
 
 
 L = LinkedList()
-L.append(12)
-L.append(15)
-L.append(10)
-L.append(11)
-L.append(5)
-L.append(6)
+L.append(1)
+L.append(1)
 L.append(2)
-L.append(3)
 print(L)
+L.removeDuplicates(L)
+
 # print(L.compute(12))
