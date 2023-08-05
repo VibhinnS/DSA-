@@ -1,6 +1,6 @@
-def iterative_subsequence(array):
+def iterative_subsequence(arr):
     output_array = [[]]
-    for nums in array:
+    for nums in arr:
         n = len(output_array)
         for i in range (n):
             internal_array = output_array[i].copy()
