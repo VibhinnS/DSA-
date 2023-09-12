@@ -101,7 +101,7 @@ for i in range(1, len(list1)):
     root.insert(list1[i])
 
 # Search for a value in the tree
-root.search(4)
+# root.search(4)
 
 # Print the tree
 print_tree(root)

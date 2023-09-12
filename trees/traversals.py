@@ -37,3 +37,38 @@ class BST:
                 self.right.search(data)
             else:
                 print("No Node Present")
+                
+    def preorder(self):
+        #root - left - right
+        #pehle root print, fir left subtree fir right subtree
+        print(self.key, end=" ")
+        if self.left:
+            self.left.preorder()
+        if self.right:
+            self.right.preorder()
+
+    def inorder(self):
+        #left - root - right
+        if self.left:
+            self.left.inorder()
+        print(self.key, end=" ")
+        if self.right:
+            self.right.inorder()
+
+    def postorder(self):
+        #left - right - root
+        if self.left:
+            self.left.postorder()
+        if self.right:
+            self.right.postorder()
+        print(self.key, end=" ")
+            
+list1 = [20, 4, 30, 4, 1, 5, 6] 
+root = BST(list1[0])
+for i in range(1, len(list1)):
+    root.insert(list1[i])
+root.preorder()
+print("\n")
+root.inorder()
+print("\n")
+root.postorder()
