@@ -38,6 +38,37 @@ class BST:
             else:
                 print("No Node Present")
                 
+    def delete(self, data):
+        if self.key is None:
+            print("Delete Impossible")
+            return
+        if data < self.key:
+            if self.left:
+                self.left = self.left.delete(data)
+            else:
+                print("Node Unavailable")
+        elif data > self.key:
+            if self.right:
+                self.right = self.right.delete(data)
+            else:
+                print("Node Unavailable")
+        else:
+            if self.left is None:
+                temp = self.right
+                self = None
+                return temp
+            if self.right is None:
+                temp = self.left
+                self = None
+                return temp
+        node = self.right
+        while node.left:
+            node = node.left
+            
+            
+            
+             
+                
     def preorder(self):
         #root - left - right
         #pehle root print, fir left subtree fir right subtree
