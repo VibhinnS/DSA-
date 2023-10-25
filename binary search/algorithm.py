@@ -18,4 +18,4 @@ def binary_search(array, key):
     return -1
 
 
-binary_search([1, 2, 3, 4, 5, 6, 8, 9, 10], 6)
+binary_search([1, 2, 3, 5, 5, 5, 8, 9, 10], 5)
