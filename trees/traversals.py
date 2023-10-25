@@ -1,105 +1,89 @@
 class BST:
     def __init__(self, data):
-        self.key = data
-        self.left = None
-        self.right = None
-        
-    def insert(self, data):
-        if self.key is None:
-            self.key = data
+        self.data = data
+        self.left_child = None
+        self.right_child = None
+    
+    def insert(self, new_data):
+        if new_data == self.data:
             return
-        
-        if self.key == data:
-            return
-        
-        if self.key > data:
-            if self.left:
-                self.left.insert(data)
+        if new_data < self.data:
+            if self.left_child is None:
+                self.left_child = BST(new_data)
             else:
-                self.left = BST(data)
+                self.left_child.insert(new_data)
         else:
-            if self.right:
-                self.right.insert(data)
+            if self.right_child is None:
+                self.right_child = BST(new_data)
             else:
-                self.right = BST(data)
-                
-    def search(self, data):
-        if self.key == data:
-            print("Node Present")
+                self.right_child.insert(new_data)
+       
+    def search(self, key):
+        if self.data == key:
+            print(True)
             return
-        if data < self.key:
-            if self.left:
-                self.left.search(data)
+        if key < self.data:
+            if not self.left_child:
+                print(False)
             else:
-                print("No Node Present")
+                self.left_child.search(key)
         else:
-            if self.right:
-                self.right.search(data)
+            if not self.right_child:
+                print(False)
             else:
-                print("No Node Present")
-                
-    def delete(self, data):
-        if self.key is None:
-            print("Delete Impossible")
-            return
-        if data < self.key:
-            if self.left:
-                self.left = self.left.delete(data)
-            else:
-                print("Node Unavailable")
-        elif data > self.key:
-            if self.right:
-                self.right = self.right.delete(data)
-            else:
-                print("Node Unavailable")
-        else:
-            if self.left is None:
-                temp = self.right
-                self = None
-                return temp
-            if self.right is None:
-                temp = self.left
-                self = None
-                return temp
-        node = self.right
-        while node.left:
-            node = node.left
-            
-            
-            
-             
-                
+                self.right_child.search(key)
+
+
+
+
     def preorder(self):
-        #root - left - right
-        #pehle root print, fir left subtree fir right subtree
-        print(self.key, end=" ")
-        if self.left:
-            self.left.preorder()
-        if self.right:
-            self.right.preorder()
-
+        print(self.data)
+        if self.left_child:
+            self.left_child.preorder()
+        if self.right_child:
+            self.right_child.preorder()
+    
+    
+    
     def inorder(self):
-        #left - root - right
-        if self.left:
-            self.left.inorder()
-        print(self.key, end=" ")
-        if self.right:
-            self.right.inorder()
-
+        if self.left_child:
+            self.left_child.inorder()
+        print(self.data, end=" ")
+        if self.right_child:
+            self.right_child.inorder()
+    
+    
+    
     def postorder(self):
-        #left - right - root
-        if self.left:
-            self.left.postorder()
-        if self.right:
-            self.right.postorder()
-        print(self.key, end=" ")
-            
-list1 = [20, 4, 30, 4, 1, 5, 6] 
-root = BST(list1[0])
-for i in range(1, len(list1)):
-    root.insert(list1[i])
+        if self.left_child:
+            self.left_child.postorder()
+        if self.right_child:
+            self.right_child.postorder()        
+        print(self.data, end = " ")
+        
+        
+    
+    def delete(self,key):
+        if self.data is None:
+            return
+        if key < self.data:
+            if self.left_child:
+                self.left_child = self.left_child.delete(key)
+            else:
+                print(None)
+        else:
+            if self.right_child:
+                self.right_child = self.right_child.delete(key)
+            else:
+                print(None)
+        
+        
+
+        
+root = BST(20)
+list = [6,3,1,6,98,3,7]
+for element in list:
+    root.insert(element)
+
 root.preorder()
-print("\n")
 root.inorder()
-print("\n")
-root.postorder()

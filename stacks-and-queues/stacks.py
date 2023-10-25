@@ -15,7 +15,8 @@ class Stack:
         new_node = Node(value)
         new_node.next = self.top
         self.top = new_node
-
+        
+        
     def traverse(self):
         temp = self.top
         while temp is not None:
@@ -41,4 +42,3 @@ s.push(4)
 s.push(5)
 print(s.isempty())
 # s.traverse()
-
