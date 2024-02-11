@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
+from scipy.signal import convolve
 # Function to perform circular convolution
 
 
@@ -19,22 +19,27 @@ x1 = np.sin(2 * np.pi * f1 * t)
 x2 = np.sin(2 * np.pi * f2 * t)
 
 # Circular convolution of the sinusoidal signals
-result = circular_convolution(x1, x2)
-
+result_circular = circular_convolution(x1, x2)
+result_linear = convolve(x1, x2, mode="full")
 # Plot the original signals and the circular convolution result
-plt.subplot(3, 1, 1)
+plt.subplot(2, 2, 1)
 plt.plot(t, x1)
 plt.title('Sinusoidal Signal 1')
 plt.grid(True)
 
-plt.subplot(3, 1, 2)
+plt.subplot(2, 2, 2)
 plt.plot(t, x2)
 plt.title('Sinusoidal Signal 2')
 plt.grid(True)
 
-plt.subplot(3, 1, 3)
-plt.plot(t, np.real(result))  # Take real part since there might be small imaginary components
+plt.subplot(2, 2, 3)
+plt.plot(t, np.real(result_circular))  # Take real part since there might be small imaginary components
 plt.title('Circular Convolution Result')
+plt.grid(True)
+
+plt.subplot(2, 2, 4)
+plt.plot(t, result_linear[:len(t)], label='Linear Convolution', linestyle='dashed')
+plt.title('Linear Convolution Result')
 plt.grid(True)
 
 plt.tight_layout()

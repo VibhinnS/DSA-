@@ -1,44 +1,51 @@
-class Node:
-    def __init__(self, value):
-        self.data = value
-        self.next = None
-
-class Stack:
-    def __init__(self):
-        self.top = None
-
-    def isempty(self):
-        return self.top is None
-
-    def push(self, value):
-        # similar to head se insertion
-        new_node = Node(value)
-        new_node.next = self.top
-        self.top = new_node
-        
-        
-    def traverse(self):
-        temp = self.top
-        while temp is not None:
-            print(temp.data)
-            temp = temp.next
-
-    def peek(self):
-        if self.isempty():
-            return -1
-        else:
-            return self.top.data
-
-    def pop(self):
-        if self.isempty():
-            return -1
-        else:
-            self.top = self.top.next
+from __future__ import annotations
+from typing import Generic, TypeVar
+T = TypeVar("T")
 
 
-s = Stack()
-s.push(3)
-s.push(4)
-s.push(5)
-print(s.isempty())
-# s.traverse()
+class StackOverflow:
+    raise ValueError("StackOverflow")
+
+
+class StackUnderflow:
+    raise ValueError("Couldn't find stack")
+
+
+class Stack(Generic[T]):
+    def __init__(self, limit: int):
+        self.stack = list[T] = []
+        self.limit = limit
+
+    def __bool__(self) -> bool:
+        return bool(self.stack)
+
+    def __str__(self) -> str:
+        return str(self.stack)
+
+    def push(self, data: T) -> None | object:
+        if len(self.stack) >= self.limit:
+            return StackOverflow
+        self.stack.append(data)
+
+    def pop(self) -> T:
+        if not self.stack:
+            raise StackUnderflow
+        return self.stack.pop()
+
+    def peek(self) -> T:
+        if not self.stack:
+            return StackUnderflow
+        return self.stack[-1]
+
+    def is_empty(self) -> bool:
+        return not bool(self.stack)
+
+    def is_full(self) -> bool:
+        return bool(self.stack)
+
+    def size(self) -> int:
+        return len(self.stack)
+
+    def __contains__(self, item) -> T:
+        return item in self.stack
+
