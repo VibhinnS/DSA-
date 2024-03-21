@@ -1,6 +1,5 @@
 from __future__ import annotations
-
-
+import collections
 class Node:
     def __init__(self, data: int):
         self.data = data
@@ -8,13 +7,12 @@ class Node:
         self.right = None
 
 
-new = Node(10)
-new.left = Node(20)
-new.right = Node(30)
-new.right.left = Node(40)
-new.right.right = Node(50)
-new.right.right.right = Node(80)
-
+new: Node = Node(1)
+new.left = Node(2)
+new.right = Node(5)
+new.left.left = Node(3)
+new.left.right = Node(4)
+new.right.right = Node(6)
 
 def inorder(root):
     if root is not None:
@@ -29,6 +27,7 @@ def preorder(root):
         preorder(root.left)
         preorder(root.right)
 
+# preorder(new)
 
 def postorder(root):
     if root is not None:
@@ -113,4 +112,103 @@ def iterative_inorder_traversal(root):
             curr = curr.left
 
 
-print(iterative_inorder_traversal(new))
+# print(iterative_inorder_traversal(new))
+
+
+def level_order_traversal(root: Node) -> list[list[int]]:
+    if not root:
+        return []
+    
+    result: list[list[int]] = []
+    queue: list[Node] = [root]
+    
+    while queue:
+        level_size = len(queue)
+        current_level = []
+        
+        for _ in range(level_size):
+            node = queue.pop(0)
+            current_level.append(node.data)
+
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+            
+        result.append(current_level)
+    return result
+# print(level_order_traversal(new))
+
+def rightSideView(root: Node) -> list[int]:
+    result = []  # Initialize an empty list to store the rightmost values
+    q = collections.deque([root])  # Initialize a deque with the root node
+    
+    # Perform BFS traversal
+    while q:
+        rightMost = None  # Initialize a variable to track the rightmost node at each level
+        n = len(q)  # Get the number of nodes at the current level
+        
+        # Iterate through each node at the current level
+        for i in range(n):
+            node = q.popleft()  # Dequeue a node from the left of the deque
+            if node:
+                rightMost = node  # Update the rightmost node
+                q.append(node.left)  # Enqueue the left child
+                q.append(node.right)  # Enqueue the right child
+        
+        # If a rightmost node was encountered at the current level, append its value to the result
+        if rightMost:
+            result.append(rightMost.data)
+    
+    return result  # Return the list containing the rightmost values
+
+def leftSideView(root: Node) -> list[int]:
+    result = []  # Initialize an empty list to store the rightmost values
+    q = collections.deque([root])  # Initialize a deque with the root node
+    
+    # Perform BFS traversal
+    while q:
+        leftMost = None  # Initialize a variable to track the rightmost node at each level
+        n = len(q)  # Get the number of nodes at the current level
+        
+        # Iterate through each node at the current level
+        for i in range(n):
+            node = q.popleft()  # Dequeue a node from the left of the deque
+            if node:
+                leftMost = node  # Update the rightmost node
+                q.append(node.right)  # Enqueue the right child
+                q.append(node.left)  # Enqueue the left child
+        
+        # If a rightmost node was encountered at the current level, append its value to the result
+        if leftMost:
+            result.append(leftMost.data)
+    
+    return result  # Return the list containing
+# print(leftSideView(new))
+
+def isSymmetric(root) -> list[list[int]]:
+    if not root:
+        return False
+
+    levels: list[list[int]] = []
+    queue: list[int] = [root]
+
+    while queue:
+        size: int = len(queue)
+        current_level: list[int] = []
+
+        for _ in range(size):
+            node = queue.pop(0)
+            if node.left:
+                current_level.append(node.left.data)
+            if node.right:
+                current_level.append(node.right.data)
+
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+        levels.append(current_level)
+    return levels
+
+# print(isSymmetric(new))

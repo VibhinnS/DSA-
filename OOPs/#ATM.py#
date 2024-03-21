@@ -96,7 +96,7 @@ class AtmMachine :
             print('Exit')
         else:
             print("Invalid Input")
-            self.menu()
+            self.menu
     
 
 
