@@ -1,5 +1,9 @@
-t = int(input())
-for _ in range(t):
-    n = int(input())
-    array = [abs(int(x)) for x in input().split()]
-    print(sum(array))
+import calendar
+
+def fxn(year, month, day):
+    variable = calendar.monthrange(year, month)
+
+    return int(1<=day<=variable[1])
+
+
+print(fxn(2022,2,29))

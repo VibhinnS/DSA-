@@ -115,7 +115,7 @@ def iterative_inorder_traversal(root):
 # print(iterative_inorder_traversal(new))
 
 
-def level_order_traversal(root: Node) -> list[list[int]]:
+def bfs(root: Node) -> list[list[int]]:
     if not root:
         return []
     
@@ -137,7 +137,7 @@ def level_order_traversal(root: Node) -> list[list[int]]:
             
         result.append(current_level)
     return result
-# print(level_order_traversal(new))
+# print(bfs(new))
 
 def rightSideView(root: Node) -> list[int]:
     result = []  # Initialize an empty list to store the rightmost values
