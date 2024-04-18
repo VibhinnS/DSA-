@@ -1,5 +1,5 @@
 from collections import deque
-def shortest_path(grid, start):
+def shortest_path(grid, start, end):
     directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
     rows = len(grid)
     cols = len(grid[0])
